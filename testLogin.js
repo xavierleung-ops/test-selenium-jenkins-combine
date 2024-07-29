@@ -5,7 +5,9 @@ async function loginTest() {
   let driver;
   try {
     console.log('Starting the browser...');
-    driver = await new Builder().forBrowser('chrome').build();
+    let builder = new Builder().forBrowser('chrome');
+    console.log("Building chrome");
+    driver = await builder.build();
 
     console.log('Navigating to the login page...');
     await driver.get('https://test-login-app.vercel.app/');
