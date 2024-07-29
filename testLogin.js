@@ -19,8 +19,15 @@ async function loginTest() {
     assert.strictEqual(pageTitle, "Welcomepage");
     //Check if redirect to login page was successfull
     await driver.wait(until.titleIs("Welcomepage"), 4000);
+  } catch (error) {
+    console.error('Error encountered:', error);
+    throw error; // Rethrow after logging 
   } finally {
-    await driver.quit();
+    if (driver) {
+      await driver.quit();
+    }
   }
 }
-loginTest();
+loginTest().catch(error => {
+  console.error('Failed to execute test:', error);
+});
