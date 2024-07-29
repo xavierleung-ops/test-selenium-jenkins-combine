@@ -1,33 +1,44 @@
-const { Builder, By, until } = require("selenium-webdriver");
-const assert = require("assert");
+const { Builder, By, Key, until } = require('selenium-webdriver');
+const assert = require('assert');
+
 async function loginTest() {
-  // launch the browser
-  let driver = await new Builder().forBrowser("chrome").build();
+  let driver;
   try {
-    //navigate to facebook login page
-    await driver.get("https://test-login-app.vercel.app/");
-    // Select input elements and fill them out
-    await driver.findElement(By.id("email")).sendKeys("test3@gmail.com");
-    await driver.findElement(By.id("password")).sendKeys("Password@12345");
-    // Select login button and invoke click action
-    //If login details are correct we wiil be redirected to the welcome page
-    await driver.findElement(By.name("login")).click();
-    //On succesful login get page title
-    //Check page title, to confirm login was successful
+    console.log('Starting the browser...');
+    driver = await new Builder().forBrowser('chrome').build();
+
+    console.log('Navigating to the login page...');
+    await driver.get('https://test-login-app.vercel.app/');
+
+    console.log('Entering the email...');
+    await driver.findElement(By.id('email')).sendKeys('test3@gmail.com');
+
+    console.log('Entering the password...');
+    await driver.findElement(By.id('password')).sendKeys('Password@12345');
+
+    console.log('Clicking the login button...');
+    await driver.findElement(By.name('login')).click();
+
+    console.log('Getting the page title...');
     const pageTitle = await driver.getTitle();
-    // assert usign node assertion
+    console.log(`Page title is: ${pageTitle}`);
     assert.strictEqual(pageTitle, "Welcomepage");
-    //Check if redirect to login page was successfull
-    await driver.wait(until.titleIs("Welcomepage"), 4000);
+
+    console.log('Waiting for the correct page title...');
+    await driver.wait(until.titleIs('Welcomepage'), 4000);
+
+    console.log('Test completed successfully');
   } catch (error) {
     console.error('Error encountered:', error);
-    throw error; // Rethrow after logging 
+    throw error; // Rethrow after logging
   } finally {
     if (driver) {
+      console.log('Closing the browser...');
       await driver.quit();
     }
   }
 }
+
 loginTest().catch(error => {
   console.error('Failed to execute test:', error);
 });
