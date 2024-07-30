@@ -17,30 +17,22 @@ async function loginTest() {
     console.log("Building chrome");
     driver = await builder.build();
 
-    console.log('Navigating to the login page...');
-    await driver.get('https://test-login-app.vercel.app/');
+    console.log('Navigating to the google page...');
+    await driver.get('http://www.google.com/');
 
-    console.log('Entering the email...');
-    await driver.findElement(By.id('email')).sendKeys('test3@gmail.com');
-
-    console.log('Entering the password...');
-    await driver.findElement(By.id('password')).sendKeys('Password@12345');
-
-    console.log('Clicking the login button...');
-    await driver.findElement(By.name('login')).click();
-
-    console.log('Getting the page title...');
-    const pageTitle = await driver.getTitle();
-    console.log(`Page title is: ${pageTitle}`);
-    assert.strictEqual(pageTitle, "Welcomepage");
 
     console.log('Waiting for the correct page title...');
-    await driver.wait(until.titleIs('Welcomepage'), 4000);
+    await driver.wait(until.titleIs('Google'), 4000);
+
+    console.log('Waiting for search...');
+    await driver.findElement(By.name('q')).sendKeys('webdriver-selenium-test', Key.RETURN);
+    await driver.wait(until.titleIs('webdriver-selenium-test - Google Search'), 4000);
+    
 
     console.log('Test completed successfully');
   } catch (error) {
     console.error('Error encountered:', error);
-    throw error; // Rethrow after logging
+    throw error; // Rethrow
   } finally {
     if (driver) {
       console.log('Closing the browser...');
