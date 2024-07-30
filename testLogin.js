@@ -22,7 +22,7 @@ async function loginTest() {
 
     await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
     await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
-    const pageTitle = await driver.getTitle();
+    let pageTitle = await driver.getTitle();
     pageTitle = pageTitle.split(' - ')[0];
     console.log("pageTitle:",pageTitle);
     assert.strictEqual(pageTitle, 'Webdriver selenium test', 'Page title does not contain the expected text.');
@@ -32,7 +32,7 @@ async function loginTest() {
     await driver.get('http://www.google.com/');
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
     await driver.wait(until.titleContains('Invalid test'), 4000);
-    const pageTitle2 = await driver.getTitle();
+    let pageTitle2 = await driver.getTitle();
     pageTitle2 = pageTitle2.split(' - ')[0];
     console.log("pageTitle2:",pageTitle2);
     assert.strictEqual(pageTitle2, 'Webdriver selenium test', 'Page title does not contain the expected text.');
