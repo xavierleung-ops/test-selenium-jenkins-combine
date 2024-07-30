@@ -16,15 +16,12 @@ async function loginTest() {
     let builder = new Builder().forBrowser('chrome').setChromeOptions(options);
     console.log("Building chrome");
     driver = await builder.build();
-
-    console.log('Navigating to the google page...');
+    
+    console.log("Test results:-----------------------------------"
     await driver.get('http://www.google.com/');
 
-
-    console.log('Waiting for the correct page title...');
     await driver.wait(until.titleIs('Google'), 4000);
 
-    console.log('Waiting for search...');
     await driver.findElement(By.name('q')).sendKeys('webdriver-selenium-test', Key.RETURN);
     await driver.wait(until.titleIs('webdriver-selenium-test - Google Search'), 4000);
     
