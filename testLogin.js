@@ -36,9 +36,6 @@ async function loginTest() {
     assert.strictEqual(pageTitle2, 'Webdriver selenium test - Google 搜尋', 'Page title does not contain the expected text.');
     
     
-  } catch (error) {
-    console.error('Error encountered:', error);
-    throw error; // Rethrow
   } finally {
     if (driver) {
       console.log('Closing the browser...');
