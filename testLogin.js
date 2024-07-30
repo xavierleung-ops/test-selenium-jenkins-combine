@@ -24,9 +24,13 @@ async function loginTest() {
 
     await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
     await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
-    
-
     console.log('Test completed successfully');
+
+    console.log("Invalid test results:-----------------------------------")
+    await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
+    await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
+    
+    
   } catch (error) {
     console.error('Error encountered:', error);
     throw error; // Rethrow
