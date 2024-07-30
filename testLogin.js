@@ -27,7 +27,7 @@ async function loginTest() {
 
     console.log("Invalid test results:-----------------------------------")
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
-    assert.ok(pageTitle.includes('Webdriver selenium test'), 'Page title does not contain the expected text.');
+    assert.ok(pageTitle.includes('abc'), 'Page title does not contain the expected text.');
     
     
   } catch (error) {
