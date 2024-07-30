@@ -24,7 +24,7 @@ async function loginTest() {
     await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
     const pageTitle = await driver.getTitle();
     console.log("pageTitle:",pageTitle);
-    assert.strictEqual(pageTitle.includes('Webdriver selenium test'), true, 'Page title does not contain the expected text.');
+    assert.strictEqual(pageTitle, 'Webdriver selenium test - Google 搜尋', 'Page title does not contain the expected text.');
     console.log('Test completed successfully');
 
     console.log("Invalid test results:-----------------------------------")
@@ -33,7 +33,7 @@ async function loginTest() {
     await driver.wait(until.titleContains('Invalid test'), 4000);
     const pageTitle2 = await driver.getTitle();
     console.log("pageTitle2:",pageTitle2);
-    assert.strictEqual(pageTitle2.includes('abc'), true, 'Page title does not contain the expected text.');
+    assert.strictEqual(pageTitle2, 'Webdriver selenium test - Google 搜尋', 'Page title does not contain the expected text.');
     
     
   } catch (error) {
