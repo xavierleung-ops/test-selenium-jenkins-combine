@@ -28,6 +28,7 @@ async function loginTest() {
     console.log('Test completed successfully');
 
     console.log("Invalid test results:-----------------------------------")
+    await driver.get('http://www.google.com/');
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
     await driver.wait(until.titleContains('Invalid test'), 4000);
     const pageTitle2 = await driver.getTitle();
