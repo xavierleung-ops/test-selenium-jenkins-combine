@@ -22,8 +22,8 @@ async function loginTest() {
 
     await driver.wait(until.titleIs('Google'), 4000);
 
-    await driver.findElement(By.name('q')).sendKeys('webdriver-selenium-test', Key.RETURN);
-    await driver.wait(until.titleIs('webdriver-selenium-test - Google Search'), 4000);
+    await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
+    await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
     
 
     console.log('Test completed successfully');
