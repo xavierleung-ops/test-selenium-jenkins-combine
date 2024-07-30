@@ -27,6 +27,7 @@ async function loginTest() {
     console.log("pageTitle:",pageTitle);
     assert.strictEqual(pageTitle, 'Webdriver selenium test', 'Page title does not contain the expected text.');
     console.log('Test completed successfully');
+    console.log()
 
     console.log("Invalid test results:--------------------------------------------------------------")
     await driver.get('http://www.google.com/');
