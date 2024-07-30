@@ -17,7 +17,7 @@ async function loginTest() {
     console.log("Building chrome");
     driver = await builder.build();
     
-    console.log("Test results:-----------------------------------")
+    console.log("Test results:----------------------------------------------------------------------")
     await driver.get('http://www.google.com/');
 
     await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
@@ -28,7 +28,7 @@ async function loginTest() {
     assert.strictEqual(pageTitle, 'Webdriver selenium test', 'Page title does not contain the expected text.');
     console.log('Test completed successfully');
 
-    console.log("Invalid test results:-----------------------------------")
+    console.log("Invalid test results:--------------------------------------------------------------")
     await driver.get('http://www.google.com/');
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
     await driver.wait(until.titleContains('Invalid test'), 4000);
