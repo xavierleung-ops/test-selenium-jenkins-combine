@@ -2,6 +2,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const assert = require('assert');
 
 // Added options for not found DevToolsActivePort file
+const chrome = require('selenium-webdriver/chrome')
 const options = new chrome.Options()
 
 async function loginTest() {
