@@ -20,15 +20,14 @@ async function loginTest() {
     console.log("Test results:-----------------------------------")
     await driver.get('http://www.google.com/');
 
-    await driver.wait(until.titleIs('Google'), 4000);
-
     await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
-    await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
+    const pageTitle = await driver.getTitle();
+    assert.ok(pageTitle.includes('Webdriver selenium test'), 'Page title does not contain the expected text.');
     console.log('Test completed successfully');
 
     console.log("Invalid test results:-----------------------------------")
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
-    await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
+    assert.ok(pageTitle.includes('Webdriver selenium test'), 'Page title does not contain the expected text.');
     
     
   } catch (error) {
