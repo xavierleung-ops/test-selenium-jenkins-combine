@@ -23,6 +23,7 @@ async function loginTest() {
     await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
     await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
     const pageTitle = await driver.getTitle();
+    console.log("pageTitle:",pageTitle);
     assert.strictEqual(pageTitle.includes('Webdriver selenium test'), true, 'Page title does not contain the expected text.');
     console.log('Test completed successfully');
 
@@ -30,6 +31,7 @@ async function loginTest() {
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
     await driver.wait(until.titleContains('Invalid test'), 4000);
     const pageTitle2 = await driver.getTitle();
+    console.log("pageTitle2:",pageTitle2);
     assert.strictEqual(pageTitle2.includes('abc'), false, 'Page title does not contain the expected text.');
     
     
