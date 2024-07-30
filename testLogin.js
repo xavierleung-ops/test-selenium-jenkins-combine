@@ -17,7 +17,7 @@ async function loginTest() {
     console.log("Building chrome");
     driver = await builder.build();
     
-    console.log("Test results:-----------------------------------"
+    console.log("Test results:-----------------------------------")
     await driver.get('http://www.google.com/');
 
     await driver.wait(until.titleIs('Google'), 4000);
