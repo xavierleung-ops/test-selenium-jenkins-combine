@@ -20,7 +20,9 @@
 
   "dependencies": {
 
-    "selenium-webdriver": "^4.11.1"
+    "selenium-webdriver": "^4.11.1",
+    
+    "chromedriver": "^127.0.0"
 
   }
 
