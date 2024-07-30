@@ -33,7 +33,7 @@ async function loginTest() {
     await driver.wait(until.titleContains('Invalid test'), 4000);
     const pageTitle2 = await driver.getTitle();
     console.log("pageTitle2:",pageTitle2);
-    assert.strictEqual(pageTitle2.includes('abc'), false, 'Page title does not contain the expected text.');
+    assert.strictEqual(pageTitle2.includes('abc'), true, 'Page title does not contain the expected text.');
     
     
   } catch (error) {
