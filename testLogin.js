@@ -17,6 +17,7 @@ describe('Google Search Tests', () => {
   });
 
   afterAll(async () => {
+    console.log('Test finished')
     if (driver) {
       console.log('Closing the browser...');
       await driver.quit();
@@ -24,7 +25,6 @@ describe('Google Search Tests', () => {
   });
 
   test('Valid search should return correct title', async () => {
-    console.log("Test results:----------------------------------------------------------------------");
     await driver.get('http://www.google.com/');
     await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
     await driver.wait(until.titleContains('Webdriver selenium test'), 4000);
@@ -35,7 +35,6 @@ describe('Google Search Tests', () => {
   });
 
   test('Invalid search should not return correct title', async () => {
-    console.log("Invalid test results:--------------------------------------------------------------");
     await driver.get('http://www.google.com/');
     await driver.findElement(By.name('q')).sendKeys('Invalid test', Key.RETURN);
     await driver.wait(until.titleContains('Invalid test'), 4000);
