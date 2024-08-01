@@ -32,7 +32,7 @@ describe('Google Search Tests', () => {
     pageTitle = pageTitle.split(' - ')[0];
     console.log("pageTitle:", pageTitle);
     expect(pageTitle).toBe('Webdriver selenium test');
-  }, 10000);
+  }, 20000);
 
   // test('Invalid search should not return correct title', async () => {
   //   await driver.get('http://www.google.com/');
