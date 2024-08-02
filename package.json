@@ -22,10 +22,8 @@
 
     "selenium-webdriver": "^4.11.1",
     
-    "jest": "^29.7.0",
+    "jest": "^29.7.0"
     
-    "chromedriver": "^127.0.0"
-
   }
 
 }
