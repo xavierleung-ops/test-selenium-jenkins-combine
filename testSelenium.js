@@ -94,7 +94,7 @@ describe('Google Search Tests', () => {
     }
   }, 60000);
 
-  test('Edit & verify web table', async () => {
+  test('Edit & verify in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
 
     var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][text()='Cierra']"));
@@ -110,11 +110,11 @@ describe('Google Search Tests', () => {
     await firstNameField.clear();
     await firstNameField.sendKeys('John');
 
-    // Submit the form
+    // Submit form
     const submitButton = await driver.findElement(By.id('submit'));
     await submitButton.click();
 
-    // Verify the changes were made in the table
+    // Verify the changes were made in the web table
     firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][text()='John']"));
     displayedFirstName = await firstNameInTable.getText();
     assert.strictEqual(displayedFirstName, 'John', 'The first name in the table was not updated correctly.');
@@ -122,6 +122,31 @@ describe('Google Search Tests', () => {
     console.log('The first name was updated to:', displayedFirstName);
   }, 60000);  
 
+  test('Delete & verify in the web table', async () => {
+    await driver.get('https://demoqa.com/webtables');
+
+    let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
+    let initialRowCount = initialRows.length;
+
+    var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
+    console.log('The first name in first column was:', displayedFirstName);
+    const deleteButtons = await driver.findElements(By.xpath("//span[@title='Delete']"));
+    assert(deleteButtons.length > 0, 'No delete buttons found');
+    await deleteButtons[0].click(); // Click the first delete button
+
+    await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
+
+    let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
+    let remainingRowCount = remainingRows.length;
+    console.log('Number of rows after deletion:', remainingRowCount);
+
+    assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
+
+    firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
+    console.log('The first name in first column after deletion was:', displayedFirstName);
+
+    console.log('Row deletion test passed.');
+  }, 60000);  
   
 
   // test('Valid search should return correct title', async () => {
