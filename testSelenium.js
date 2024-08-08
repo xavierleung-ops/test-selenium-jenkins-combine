@@ -24,8 +24,9 @@ describe('Google Search Tests', () => {
     }
   });
 
-  test('Fill form with state and city dropdowns', async () => {
+  test('Fill form with input & dropdowns', async () => {
     await driver.get('https://demoqa.com/automation-practice-form');
+    console.log("Finished accessing")
 
     await driver.findElement(By.id('firstName')).sendKeys('John');
     await driver.findElement(By.id('lastName')).sendKeys('Doe');
@@ -68,7 +69,7 @@ describe('Google Search Tests', () => {
       assert.strictEqual(label, expectedResults[i][0]);
       assert.strictEqual(value, expectedResults[i][1]);
     }    
-  });
+  }, 30000);
 
   // test('Valid search should return correct title', async () => {
   //   await driver.get('http://www.google.com/');
