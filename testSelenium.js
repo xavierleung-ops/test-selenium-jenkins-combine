@@ -133,6 +133,7 @@ describe('Google Search Tests', () => {
     console.log('The first name in first column was:', firstNameInTable);
     const deleteButtons = await driver.findElements(By.xpath("//span[@title='Delete']"));
     assert(deleteButtons.length > 0, 'No delete buttons found');
+    await driver.executeScript("arguments[0].scrollIntoView(true);", deleteButtons[0]);
     await deleteButtons[0].click(); // Click the first delete button
 
     await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
