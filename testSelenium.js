@@ -134,7 +134,7 @@ describe('Google Search Tests', () => {
         for (const row of rows) {
             const cells = await row.findElements(By.css('.rt-td'));
             const texts = await Promise.all(cells.map(cell => cell.getText()));
-            
+            console.log("Function value", texts);
             // Check if all cells in the row have non-empty values
             if (texts.every(text => text.trim() !== '')) {
                 validCount++;
@@ -162,7 +162,7 @@ describe('Google Search Tests', () => {
     let remainingValidRowCount = await countFullyPopulatedRows();
     console.log('Number of rows after deletion:', remainingValidRowCount);
 
-    assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
+    assert.strictEqual(remainingValidRowCount, initialValidRowCount - 1, 'The row count did not decrease by one after deletion');
 
     firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
     console.log('The first name in first column after deletion was:', firstNameInTable);
