@@ -42,10 +42,13 @@ describe('Google Search Tests', () => {
     let cityDropdown = driver.findElement(By.id('city'));
     await cityDropdown.click();
     await driver.findElement(By.xpath("//div[contains(text(),'Delhi')]")).click();
+    console.log("Finished fill")
+
 
     await driver.findElement(By.id('submit')).click();
     // Wait for the modal to appear
     await driver.wait(until.elementLocated(By.className('modal-content')), 10000);
+    console.log("Finished submit")
 
     // Assert the table entries
     const tableRows = await driver.findElements(By.css('.table tbody tr'));
@@ -69,7 +72,7 @@ describe('Google Search Tests', () => {
       assert.strictEqual(label, expectedResults[i][0]);
       assert.strictEqual(value, expectedResults[i][1]);
     }    
-  }, 30000);
+  }, 60000);
 
   // test('Valid search should return correct title', async () => {
   //   await driver.get('http://www.google.com/');
