@@ -74,6 +74,30 @@ describe('Google Search Tests', () => {
     }    
   }, 60000);
 
+  test('Check values in the web table', async () => {
+    await driver.get('https://demoqa.com/webtables');
+
+    const tableRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
+
+    assert(tableRows.length > 0, "No rows found in the table");
+
+    const expectedResults = [
+      'Cierra', // First name
+      'Vega',  // Last name
+      '39',    // Age
+      'cierra@example.com', // Email
+      '10000', // Salary
+      'Insurance' // Department
+    ];
+
+    const cells = await tableRows[0].findElements(By.css('.rt-td'));
+    for (let i = 0; i < expectedResults.length; i++) {
+      const text = await cells[i].getText();
+      assert.strictEqual(text, expectedResults[i], `Mismatch in column ${i}: expected ${expectedResults[i]} but found ${text}`);
+      console.log(`Column ${i}: ${text}`);
+    }
+  }, 30000);
+
   // test('Valid search should return correct title', async () => {
   //   await driver.get('http://www.google.com/');
   //   await driver.findElement(By.name('q')).sendKeys('Webdriver selenium test', Key.RETURN);
