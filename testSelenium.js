@@ -124,9 +124,27 @@ describe('Google Search Tests', () => {
 
   test('Delete & verify in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
+
+    // To count rows where all cells have non-empty values
+    async function countFullyPopulatedRows() {
+        const rows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
+        let validCount = 0;
+
+        for (const row of rows) {
+            const cells = await row.findElements(By.css('.rt-td'));
+            const texts = await Promise.all(cells.map(cell => cell.getText()));
+            
+            // Check if all cells in the row have non-empty values
+            if (texts.every(text => text.trim() !== '')) {
+                validCount++;
+            }
+        }
+        return validCount;
+    }
     
-    let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
-    let initialRowCount = initialRows.length;
+    // let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
+    // let initialRowCount = initialRows.length;
+    let initialValidRowCount = await countFullyPopulatedRows();
     console.log('Number of rows before deletion:', initialRowCount);
 
     var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
@@ -138,8 +156,9 @@ describe('Google Search Tests', () => {
 
     await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
 
-    let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
-    let remainingRowCount = remainingRows.length;
+    // let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
+    // let remainingRowCount = remainingRows.length;
+    let remainingRowCount = await countFullyPopulatedRows();
     console.log('Number of rows after deletion:', remainingRowCount);
 
     assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
