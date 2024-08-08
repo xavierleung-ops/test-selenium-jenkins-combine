@@ -125,8 +125,8 @@ describe('Google Search Tests', () => {
   test('Delete & verify in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
 
-    let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
-    let initialRowCount = initialRows.length;
+    let initialRowCount = driver.executeScript("return document.querySelectorAll('.rt-tbody .rt-tr-group').length;");
+    console.log('Number of rows before deletion:', initialRowCount);
 
     var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
     console.log('The first name in first column was:', firstNameInTable);
@@ -136,8 +136,7 @@ describe('Google Search Tests', () => {
 
     await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
 
-    let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
-    let remainingRowCount = remainingRows.length;
+    let remainingRowCount = driver.executeScript("return document.querySelectorAll('.rt-tbody .rt-tr-group').length;");
     console.log('Number of rows after deletion:', remainingRowCount);
 
     assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
