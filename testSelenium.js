@@ -134,8 +134,7 @@ describe('Google Search Tests', () => {
         for (const row of rows) {
             const cells = await row.findElements(By.css('.rt-td'));
             const texts = await Promise.all(cells.slice(0, -1).map(cell => cell.getText()));
-            console.log("Function value", texts);
-            // Check if all cells in the row have non-empty values
+            // Check if all cells in the row except last cell have non-empty values
             if (texts.every(text => text.trim() !== '')) {
                 validCount++;
             }
@@ -143,12 +142,10 @@ describe('Google Search Tests', () => {
         return validCount;
     }
     
-    // let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
-    // let initialRowCount = initialRows.length;
     let initialValidRowCount = await countFullyPopulatedRows();
     console.log('Number of rows before deletion:', initialValidRowCount);
 
-    var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
+    var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]")).getText();
     console.log('The first name in first column was:', firstNameInTable);
     const deleteButtons = await driver.findElements(By.xpath("//span[@title='Delete']"));
     assert(deleteButtons.length > 0, 'No delete buttons found');
@@ -157,14 +154,12 @@ describe('Google Search Tests', () => {
 
     await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
 
-    // let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
-    // let remainingRowCount = remainingRows.length;
     let remainingValidRowCount = await countFullyPopulatedRows();
     console.log('Number of rows after deletion:', remainingValidRowCount);
 
     assert.strictEqual(remainingValidRowCount, initialValidRowCount - 1, 'The row count did not decrease by one after deletion');
 
-    firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
+    firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]")).getText();
     console.log('The first name in first column after deletion was:', firstNameInTable);
 
     console.log('Row deletion test passed.');
