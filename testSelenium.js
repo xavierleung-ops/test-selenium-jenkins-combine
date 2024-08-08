@@ -133,7 +133,7 @@ describe('Google Search Tests', () => {
 
         for (const row of rows) {
             const cells = await row.findElements(By.css('.rt-td'));
-            const texts = await Promise.all(cells.map(cell => cell.getText()));
+            const texts = await Promise.all(cells.slice(0, -1).map(cell => cell.getText()));
             console.log("Function value", texts);
             // Check if all cells in the row have non-empty values
             if (texts.every(text => text.trim() !== '')) {
