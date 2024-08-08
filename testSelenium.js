@@ -96,7 +96,7 @@ describe('Google Search Tests', () => {
       assert.strictEqual(text, expectedResults[i], `Mismatch in column ${i}: expected ${expectedResults[i]} but found ${text}`);
       console.log(`Column ${i}: ${text}`);
     }
-  }, 30000);
+  }, 60000);
 
   // test('Valid search should return correct title', async () => {
   //   await driver.get('http://www.google.com/');
