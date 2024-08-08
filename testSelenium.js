@@ -27,7 +27,6 @@ describe('Google Search Tests', () => {
 
   test('Fill form with input & dropdowns', async () => {
     await driver.get('https://demoqa.com/automation-practice-form');
-    console.log("Finished accessing")
 
     await driver.findElement(By.id('firstName')).sendKeys('John');
     await driver.findElement(By.id('lastName')).sendKeys('Doe');
@@ -43,13 +42,10 @@ describe('Google Search Tests', () => {
     let cityDropdown = driver.findElement(By.id('city'));
     await cityDropdown.click();
     await driver.findElement(By.xpath("//div[contains(text(),'Delhi')]")).click();
-    console.log("Finished fill")
-
 
     await driver.findElement(By.id('submit')).click();
     // Wait for the modal to appear
     await driver.wait(until.elementLocated(By.className('modal-content')), 10000);
-    console.log("Finished submit")
 
     // Assert the table entries
     const tableRows = await driver.findElements(By.css('.table tbody tr'));
@@ -72,6 +68,9 @@ describe('Google Search Tests', () => {
       const value = await cells[1].getText();
       assert.strictEqual(label, expectedResults[i][0]);
       assert.strictEqual(value, expectedResults[i][1]);
+      console.log("Value:", value);
+      console.log("Expected results:", expectedResults[i][1]);
+      
     }    
   }, 60000);
 
