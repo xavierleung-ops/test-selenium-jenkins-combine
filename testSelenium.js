@@ -124,24 +124,9 @@ describe('Google Search Tests', () => {
 
   test('Delete & verify in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
-
-    // Count valid data rows only with values in it
-    async function countValidDataRows() {
-        const rows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
-        let count = 0;
-        for (const row of rows) {
-            const cells = await row.findElements(By.css('.rt-td'));
-            if (cells.length > 0) {
-                const texts = await Promise.all(cells.map(cell => cell.getText()));
-                if (texts.every(text => text.trim() !== '')) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
     
-    let initialRowCount = await countValidDataRows();
+    let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
+    let initialRowCount = initialRows.length;
     console.log('Number of rows before deletion:', initialRowCount);
 
     var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
@@ -153,7 +138,8 @@ describe('Google Search Tests', () => {
 
     await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
 
-    let remainingRowCount = await countValidDataRows();
+    let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
+    let remainingRowCount = remainingRows.length;
     console.log('Number of rows after deletion:', remainingRowCount);
 
     assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
