@@ -129,7 +129,7 @@ describe('Google Search Tests', () => {
     let initialRowCount = initialRows.length;
 
     var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
-    console.log('The first name in first column was:', displayedFirstName);
+    console.log('The first name in first column was:', firstNameInTable);
     const deleteButtons = await driver.findElements(By.xpath("//span[@title='Delete']"));
     assert(deleteButtons.length > 0, 'No delete buttons found');
     await deleteButtons[0].click(); // Click the first delete button
@@ -143,7 +143,7 @@ describe('Google Search Tests', () => {
     assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
 
     firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
-    console.log('The first name in first column after deletion was:', displayedFirstName);
+    console.log('The first name in first column after deletion was:', firstNameInTable);
 
     console.log('Row deletion test passed.');
   }, 60000);  
