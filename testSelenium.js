@@ -15,7 +15,7 @@ describe('Google Search Tests', () => {
     console.log('Starting the browser...');
     const builder = new Builder().forBrowser('chrome').setChromeOptions(options);
     driver = await builder.build();
-  });
+  }, 10000);
 
   afterAll(async () => {
     console.log('Test finished')
