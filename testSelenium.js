@@ -103,7 +103,8 @@ describe('Google Search Tests', () => {
     
     const editButtons = await driver.findElements(By.xpath("//span[@title='Edit']"));
     assert(editButtons.length > 0, 'No edit buttons found');
-    await editButtons[0].click();
+    await driver.executeScript("arguments[0].scrollIntoView(true);", editButtons[0]);
+    await driver.executeScript("arguments[0].click();", editButtons[0]);
 
     await driver.wait(until.elementLocated(By.id('firstName')), 5000);
     const firstNameField = await driver.findElement(By.id('firstName'));
@@ -145,7 +146,7 @@ describe('Google Search Tests', () => {
     // let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
     // let initialRowCount = initialRows.length;
     let initialValidRowCount = await countFullyPopulatedRows();
-    console.log('Number of rows before deletion:', initialRowCount);
+    console.log('Number of rows before deletion:', initialValidRowCount);
 
     var firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][1]"));
     console.log('The first name in first column was:', firstNameInTable);
@@ -158,8 +159,8 @@ describe('Google Search Tests', () => {
 
     // let remainingRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group:not(.-padRow)'));
     // let remainingRowCount = remainingRows.length;
-    let remainingRowCount = await countFullyPopulatedRows();
-    console.log('Number of rows after deletion:', remainingRowCount);
+    let remainingValidRowCount = await countFullyPopulatedRows();
+    console.log('Number of rows after deletion:', remainingValidRowCount);
 
     assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
 
