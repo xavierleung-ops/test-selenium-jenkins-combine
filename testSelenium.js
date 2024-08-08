@@ -137,8 +137,8 @@ describe('Google Search Tests', () => {
 
     await driver.wait(until.elementsLocated(By.css('.rt-tbody .rt-tr-group')), 5000);
 
-    let initialRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
-    let remainingRowCount = initialRows.length;    
+    let remainingRow = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
+    let remainingRowCount = remainingRow.length;    
     console.log('Number of rows after deletion:', remainingRowCount);
 
     assert.strictEqual(remainingRowCount, initialRowCount - 1, 'The row count did not decrease by one after deletion');
