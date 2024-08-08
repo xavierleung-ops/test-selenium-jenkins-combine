@@ -74,13 +74,10 @@ describe('Google Search Tests', () => {
     }    
   }, 60000);
 
-  test('Check values in the web table', async () => {
+  test('Verify values in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
-
     const tableRows = await driver.findElements(By.css('.rt-tbody .rt-tr-group'));
-
     assert(tableRows.length > 0, "No rows found in the table");
-
     const expectedResults = [
       'Cierra', // First name
       'Vega',  // Last name
@@ -97,6 +94,30 @@ describe('Google Search Tests', () => {
       console.log(`Column ${i}: ${text}`);
     }
   }, 60000);
+
+  test('Edit & verify web table', async () => {
+    await driver.get('https://demoqa.com/webtables');
+
+    const editButtons = await driver.findElements(By.xpath("//span[@title='Edit']"));
+    assert(editButtons.length > 0, 'No edit buttons found');
+    await editButtons[0].click();
+
+    await driver.wait(until.elementLocated(By.id('firstName')), 5000);
+    const firstNameField = await driver.findElement(By.id('firstName'));
+    await firstNameField.clear();
+    await firstNameField.sendKeys('John');
+
+    // Submit the form
+    const submitButton = await driver.findElement(By.id('submit'));
+    await submitButton.click();
+
+    // Verify the changes were made in the table
+    const firstNameInTable = await driver.findElement(By.xpath("//div[@class='rt-td'][text()='John']"));
+    const displayedFirstName = await firstNameInTable.getText();
+    assert.strictEqual(displayedFirstName, 'John', 'The first name in the table was not updated correctly.');
+
+    console.log('The first name was updated to:', displayedFirstName);
+  }, 60000);  
 
   // test('Valid search should return correct title', async () => {
   //   await driver.get('http://www.google.com/');
