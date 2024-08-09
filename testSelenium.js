@@ -47,6 +47,14 @@ describe('Google Search Tests', () => {
     // Wait for the modal to appear
     await driver.wait(until.elementLocated(By.className('modal-content')), 10000);
 
+    // Get today's date
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const month = months[today.getMonth()];
+    const year = today.getFullYear();
+    const formattedDate = `${day} ${month}, ${year}`;
+
     // Assert the table entries
     const tableRows = await driver.findElements(By.css('.table tbody tr'));
     const expectedResults = [
@@ -54,7 +62,7 @@ describe('Google Search Tests', () => {
       ['Student Email', 'john.doe@example.com'],
       ['Gender', 'Male'],
       ['Mobile', '1234567890'],
-      ['Date of Birth', '08 August,2024'],
+      ['Date of Birth', formattedDate],
       ['Subjects', ''], // Fill accordingly if needed
       ['Hobbies', ''], // Fill accordingly if needed
       ['Picture', ''], // Fill accordingly if needed
