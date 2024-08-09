@@ -53,7 +53,7 @@ describe('Google Search Tests', () => {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const month = months[today.getMonth()];
     const year = today.getFullYear();
-    const formattedDate = `${day} ${month}, ${year}`;
+    const formattedDate = `${day} ${month},  ${year}`;
 
     // Assert the table entries
     const tableRows = await driver.findElements(By.css('.table tbody tr'));
