@@ -10,8 +10,8 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update
 RUN apt-get install -y google-chrome-stable
-RUN google-chrome --version
-RUN which google-chrome
+RUN echo "$(google-chrome --version)"
+RUN echo "$(which google-chrome)"
 
 # # Install ChromeDriver
 # ARG CHROME_DRIVER_VERSION=114.0.5735.90
@@ -20,8 +20,8 @@ RUN which google-chrome
 # RUN rm ~/chromedriver_linux64.zip
 # RUN mv -f ~/chromedriver /usr/local/bin/chromedriver
 # RUN chmod +x /usr/local/bin/chromedriver
-# RUN chromedriver --version
-# RUN which chromedriver
+# RUN echo "$(chromedriver --version)"
+# RUN echo "$(which chromedriver)"
 
 # Install Firefox
 RUN apt-get install -y firefox-esr
