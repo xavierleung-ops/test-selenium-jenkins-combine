@@ -40,7 +40,6 @@ ENV BROWSER='chrome'
 
 # Install Node.js packages
 COPY package.json .
-RUN npm install chromedriver --detect_chromedriver_version
 RUN yarn
 RUN echo $(npm list chromedriver)
 
