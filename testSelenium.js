@@ -7,6 +7,7 @@ const options = new chrome.Options();
 // options.addArguments('--disable-dev-shm-usage');
 // options.addArguments('--no-sandbox');
 options.addArguments('--headless');
+options.addArguments('--remote-debugging-pipe');
 
 describe('Google Search Tests', () => {
   let driver;
