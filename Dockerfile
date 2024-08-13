@@ -1,4 +1,4 @@
-FROM node:16
+FROM --platform=linux/amd64 node:16
 
 # Install system dependencies
 RUN apt-get update -y && apt-get install -y wget unzip tzdata \
