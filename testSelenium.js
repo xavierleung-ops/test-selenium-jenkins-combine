@@ -4,8 +4,8 @@ const assert = require('assert');
 const options = new chrome.Options();
 
 // Configure options for Chrome
-options.addArguments('--disable-dev-shm-usage');
-options.addArguments('--no-sandbox');
+// options.addArguments('--disable-dev-shm-usage');
+// options.addArguments('--no-sandbox');
 options.addArguments('--headless');
 
 describe('Google Search Tests', () => {
