@@ -1,5 +1,7 @@
 FROM --platform=linux/amd64 node:20
 
+WORKDIR /usr/src/app
+
 # Install system dependencies
 RUN apt-get update -y && apt-get install -y wget unzip tzdata \
     && rm -rf /var/lib/apt/lists/*
@@ -42,6 +44,7 @@ ENV BROWSER='chrome'
 COPY package.json .
 RUN yarn
 RUN echo $(npm list chromedriver)
+RUN rm ./package.json
 
 # Copy application source
 COPY . .
