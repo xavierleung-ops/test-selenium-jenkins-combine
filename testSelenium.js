@@ -20,8 +20,12 @@ describe('Google Search Tests', () => {
   afterAll(async () => {
     console.log('Test finished')
     if (driver) {
-      console.log('Closing the browser...');
-      await driver.quit();
+      try{
+        console.log('Closing the browser...');
+        await driver.quit();
+      } catch (error) {
+        console.error('Failed to close the driver:', error);
+      } 
     }
   });
 
@@ -79,7 +83,7 @@ describe('Google Search Tests', () => {
       console.log("Value:", value, "Expected results:", expectedResults[i][1]);
       
     }    
-  }, 60000);
+  }, 90000);
 
   test('Verify values in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
@@ -100,7 +104,7 @@ describe('Google Search Tests', () => {
       assert.strictEqual(text, expectedResults[i], `Mismatch in column ${i}: expected ${expectedResults[i]} but found ${text}`);
       console.log(`Column ${i}: ${text}`);
     }
-  }, 60000);
+  }, 90000);
 
   test('Edit & verify in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
@@ -129,7 +133,7 @@ describe('Google Search Tests', () => {
     assert.strictEqual(displayedFirstName, 'John', 'The first name in the table was not updated correctly.');
 
     console.log('The first name was updated to:', displayedFirstName);
-  }, 60000);  
+  }, 90000);  
 
   test('Delete & verify in the web table', async () => {
     await driver.get('https://demoqa.com/webtables');
@@ -171,7 +175,7 @@ describe('Google Search Tests', () => {
     console.log('The first name in first column after deletion was:', firstNameInTable);
 
     console.log('Row deletion test passed.');
-  }, 60000);  
+  }, 90000);  
   
 
   // test('Valid search should return correct title', async () => {
