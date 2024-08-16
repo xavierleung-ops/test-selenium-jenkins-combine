@@ -19,8 +19,6 @@
   "license": "ISC",
 
   "dependencies": {
-
-    "selenium-webdriver": "^4.11.1",
     
     "jest": "^29.7.0",
     
